@@ -147,6 +147,8 @@ public class SequentialList<T extends Object> {
         return old;
     }
 
+    //查
+
     /**
      * 返回顺序表的节点数
      *
@@ -155,8 +157,6 @@ public class SequentialList<T extends Object> {
     public int size() {
         return size;
     }
-
-    //查
 
     /**
      * 查询顺序表是否为空
