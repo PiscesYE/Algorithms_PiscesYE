@@ -17,22 +17,58 @@ package base;
  * 单循环链表：每个节点包含数据和一个引用，尾节点的引用指向头节点或开始节点
  * 多重链的循环链表：将表中节点链在多个环上，其实我也没搞懂！
  * <p>
- * 优势：
- * 劣势：
+ * 优势：1.每个节点动态分配存储空间，避免了大片连续空间的分配
+ * 2.删除节点时直接断开对删除节点的引用，交由GC释放
+ * 劣势：数据访问时只能顺着链表查找，自由度和效率都存在一定的缺陷
  * <p>
  * Note：非线程安全
  *
  * @author PiscesYE
  */
-public class LinkedList<T extends Object>{
+public class LinkedList<T extends Object> {
 
-    private T node;
-    private LinkedList<T> next;
+    /**
+     * 链表节点数据
+     * 可以为基本数据类型，自定义的类或其他
+     * 使用泛型创建时设置节点类型
+     */
+    private Node root;
+    private int size;
 
-    public LinkedList() {
+    public LinkedList(T data) {
+        root = new Node(data);
+        size++;
     }
 
-    public LinkedList(T node) {
-        this.node = node;
+
+    class Node {
+        T node;
+        Node next;
+
+        Node(T data) {
+            node = data;
+        }
+
     }
+
+    //增
+    public boolean putNode(T data) {
+        if (data == null){
+            System.out.println("新增节点不能为空");
+            return false;
+        }
+        Node end = root;
+        for (int i = 0; i < size - 1; i++) {
+            end = end.next;
+        }
+        end.next = new Node(data);
+        return true;
+    }
+
+
+    //删
+
+    //改
+
+    //查
 }

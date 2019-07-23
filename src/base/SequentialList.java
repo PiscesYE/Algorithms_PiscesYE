@@ -28,8 +28,9 @@ public class SequentialList<T extends Object> {
     private int size;
 
     /**
-     * 可以为基本数据类型，或者自定义的类或其他
+     * 可以为基本数据类型，自定义的类或其他
      * 如包含key和value的类
+     * 使用泛型创建时设置节点类型
      * 为方便使用，数据存储从1开始
      */
     private T list[] = (T[]) new Object[MAXLEN + 1];
