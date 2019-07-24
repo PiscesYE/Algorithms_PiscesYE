@@ -169,8 +169,9 @@ public class LinkedList<T extends Object> {
     /**
      * 移除指定节点数据的节点
      * 暂时允许存储重复的值，所以需要删除的节点可能不止一个
-     *
+     * <p>
      * 有问题，不能删除第一个节点
+     * 已解决，还需要优化
      *
      * @param data 需要删除包含该数据的节点
      * @return 删除结果
@@ -184,25 +185,31 @@ public class LinkedList<T extends Object> {
         if (size == 0) {
             System.out.println("当前链表为空");
             return false;
+        } else if (size == 1) {
+            root = null;
+            size--;
+            return true;
         }
 
-        //TODO 有问题，不能删除第一个节点
+        //TODO 优化删除逻辑
         Node jump = root;
-        Node parent = jump;
+        Node parent = null;
         boolean result = false;
         for (int i = 1; i < size; i++) {
             if (jump.node == data && jump.node.equals(data)) {
-                if (--size == 0) {
-                    root = null;
+                if (parent == null) {
+                    root = root.next;
+                    size--;
                 } else {
                     parent.next = jump.next;
+                    size--;
                 }
                 result = true;
             }
             parent = jump;
             jump = jump.next;
         }
-        if (!result){
+        if (!result) {
             System.out.println("当前链表未找到该节点");
         }
         return result;
@@ -226,9 +233,10 @@ public class LinkedList<T extends Object> {
 
     /**
      * 获取链表的长度
+     *
      * @return The number of linked list
      */
-    public int size(){
+    public int size() {
         return size;
     }
 
@@ -264,10 +272,10 @@ public class LinkedList<T extends Object> {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        if (size > 0){
+        if (size > 0) {
             Node jump = root;
             for (int i = 0; i < size; i++) {
-                sb.append(jump.node.toString()+" -> ");
+                sb.append(jump.node.toString() + " -> ");
                 jump = jump.next;
             }
         }
