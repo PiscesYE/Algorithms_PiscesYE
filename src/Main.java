@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         int array[] = {1,5,3,7,4,4,9,10};
-        BaseSort.bubbleSort(array);
+        BaseSort.insertionSort(array);
         for (int i = 0; i < array.length; i++) {
             System.out.println(array[i]);
         }
